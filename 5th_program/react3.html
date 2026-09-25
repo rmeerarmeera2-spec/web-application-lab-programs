@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bill Calculator</title>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background: #f2f5f9;
+            padding: 50px;
+        }
+
+        .card {
+            background: white;
+            width: 350px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        input {
+            padding: 10px;
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+function Bill() {
+
+    const [amount, setAmount] = React.useState(0);
+    const [tax, setTax] = React.useState(0);
+
+    let total = Number(amount) + Number(tax);
+
+    return (
+        <div className="card">
+
+            <h2>Bill Calculator</h2>
+
+            <input
+                type="number"
+                placeholder="Bill Amount"
+                onChange={(e) => setAmount(e.target.value)}
+            />
+
+            <br />
+
+            <input
+                type="number"
+                placeholder="Tax"
+                onChange={(e) => setTax(e.target.value)}
+            />
+
+            <h3>Total Bill: ₹{total}</h3>
+
+        </div>
+    );
+}
+
+function App() {
+    return (
+        <div>
+            <h1>React Bill Calculator</h1>
+            <Bill />
+        </div>
+    );
+}
+
+const root = ReactDOM.createRoot(
+    document.getElementById("root")
+);
+
+root.render(<App />);
+
+</script>
+
+</body>
+</html>

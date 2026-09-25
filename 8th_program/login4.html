@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Ticket Booking</title>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: #fdf2f8;
+        }
+
+        .card {
+            width: 400px;
+            margin: 70px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        h1 {
+            text-align: center;
+            color: #db2777;
+        }
+
+        .group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 11px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 7px;
+            background: #db2777;
+            color: white;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #be185d;
+        }
+
+        .ticket {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fce7f3;
+            border-radius: 8px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+function MovieBooking() {
+
+    const [movie, setMovie] = React.useState("Avengers");
+    const [tickets, setTickets] = React.useState("");
+    const [show, setShow] = React.useState("6:00 PM");
+    const [message, setMessage] = React.useState("");
+
+    function bookTicket(e) {
+        e.preventDefault();
+
+        if (tickets === "") {
+            setMessage("Please enter number of tickets.");
+            return;
+        }
+
+        let total = Number(tickets) * 200;
+
+        setMessage(
+            "Movie: " + movie +
+            " | Show: " + show +
+            " | Tickets: " + tickets +
+            " | Total: ₹" + total
+        );
+    }
+
+    return (
+        <div className="card">
+
+            <h1>🎫 Movie Booking</h1>
+
+            <form onSubmit={bookTicket}>
+
+                <div className="group">
+                    <label>Movie</label>
+
+                    <select
+                        value={movie}
+                        onChange={(e) => setMovie(e.target.value)}
+                    >
+                        <option>Avengers</option>
+                        <option>Avatar</option>
+                        <option>Inception</option>
+                    </select>
+                </div>
+
+                <div className="group">
+                    <label>Show Time</label>
+
+                    <select
+                        value={show}
+                        onChange={(e) => setShow(e.target.value)}
+                    >
+                        <option>6:00 PM</option>
+                        <option>9:00 PM</option>
+                    </select>
+                </div>
+
+                <div className="group">
+                    <label>Number of Tickets</label>
+
+                    <input
+                        type="number"
+                        min="1"
+                        placeholder="Enter tickets"
+                        value={tickets}
+                        onChange={(e) => setTickets(e.target.value)}
+                    />
+                </div>
+
+                <button>Book Tickets</button>
+
+            </form>
+
+            {message && <div className="ticket">{message}</div>}
+
+        </div>
+    );
+}
+
+ReactDOM.createRoot(document.getElementById("root"))
+    .render(<MovieBooking />);
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Age Calculator</title>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background: #f2f5f9;
+            padding: 50px;
+        }
+
+        .card {
+            background: white;
+            width: 350px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        input {
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+function AgeCalculator() {
+
+    const [birthYear, setBirthYear] = React.useState("");
+
+    let age = birthYear ? 2026 - birthYear : 0;
+
+    return (
+        <div className="card">
+
+            <h2>Age Calculator</h2>
+
+            <input
+                type="number"
+                placeholder="Enter birth year"
+                onChange={(e) => setBirthYear(e.target.value)}
+            />
+
+            <h3>Age: {age} years</h3>
+
+        </div>
+    );
+}
+
+function App() {
+    return (
+        <div>
+            <h1>React Age Calculator</h1>
+            <AgeCalculator />
+        </div>
+    );
+}
+
+const root = ReactDOM.createRoot(
+    document.getElementById("root")
+);
+
+root.render(<App />);
+
+</script>
+
+</body>
+</html>

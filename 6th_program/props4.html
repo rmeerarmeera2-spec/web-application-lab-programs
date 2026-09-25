@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Course Enrollment Portal</title>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: #eefbf5;
+            text-align: center;
+            padding: 40px;
+        }
+
+        h1 {
+            color: #047857;
+        }
+
+        .card {
+            background: white;
+            width: 400px;
+            margin: 30px auto;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        .course {
+            background: #ecfdf5;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .status {
+            font-size: 20px;
+            font-weight: bold;
+            color: #047857;
+            margin: 20px;
+        }
+
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 7px;
+            background: #047857;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+function Course(props) {
+
+    const [enrolled, setEnrolled] = React.useState(false);
+
+    function enroll() {
+        setEnrolled(!enrolled);
+    }
+
+    return (
+        <div className="card">
+
+            <h2>Course Details</h2>
+
+            <div className="course">
+
+                <h3>{props.name}</h3>
+
+                <p>Duration: {props.duration}</p>
+
+                <p>Mode: {props.mode}</p>
+
+            </div>
+
+            <div className="status">
+                {enrolled
+                    ? "✓ Successfully Enrolled"
+                    : "Not Enrolled"}
+            </div>
+
+            <button onClick={enroll}>
+                {enrolled
+                    ? "Cancel Enrollment"
+                    : "Enroll Now"}
+            </button>
+
+        </div>
+    );
+}
+
+function App() {
+
+    return (
+        <div>
+
+            <h1>Course Enrollment Portal</h1>
+
+            <Course
+                name="Full Stack Web Development"
+                duration="3 Months"
+                mode="Online"
+            />
+
+        </div>
+    );
+}
+
+const root = ReactDOM.createRoot(
+    document.getElementById("root")
+);
+
+root.render(<App />);
+
+</script>
+
+</body>
+</html>

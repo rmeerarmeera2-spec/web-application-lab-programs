@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic Product Price Calculator</title>
+</head>
+
+<body>
+
+<h2>Product Price Calculator</h2>
+
+Product Name:
+<input type="text" id="product" placeholder="Enter product name">
+<br><br>
+
+Price:
+<input type="number" id="price" placeholder="Enter price">
+<br><br>
+
+Quantity:
+<input type="number" id="quantity" placeholder="Enter quantity">
+<br><br>
+
+<button onclick="calculate()">Calculate</button>
+
+<h3 id="result"></h3>
+
+<script>
+
+function calculate() {
+
+    let product = document.getElementById("product").value;
+    let price = document.getElementById("price").value;
+    let quantity = document.getElementById("quantity").value;
+
+    let total = price * quantity;
+
+    document.getElementById("result").innerHTML =
+        "Product: " + product + "<br>" +
+        "Price: ₹" + price + "<br>" +
+        "Quantity: " + quantity + "<br>" +
+        "Total Price: ₹" + total;
+}
+
+</script>
+
+</body>
+</html>
+
+

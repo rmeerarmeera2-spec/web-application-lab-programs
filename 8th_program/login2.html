@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hotel Booking System</title>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #eef2ff;
+        }
+
+        .container {
+            width: 400px;
+            margin: 70px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        h1 {
+            text-align: center;
+            color: #4f46e5;
+        }
+
+        .group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 11px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 7px;
+            background: #4f46e5;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #3730a3;
+        }
+
+        .success {
+            margin-top: 20px;
+            padding: 12px;
+            background: #dcfce7;
+            color: #166534;
+            border-radius: 7px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+function HotelBooking() {
+
+    const [name, setName] = React.useState("");
+    const [room, setRoom] = React.useState("Deluxe");
+    const [days, setDays] = React.useState("");
+    const [message, setMessage] = React.useState("");
+
+    function bookRoom(e) {
+        e.preventDefault();
+
+        if (name === "" || days === "") {
+            setMessage("Please fill all details.");
+            return;
+        }
+
+        let price = room === "Deluxe" ? 3000 : 5000;
+        let total = price * Number(days);
+
+        setMessage(
+            "Booking confirmed for " + name +
+            ". Total Amount: ₹" + total
+        );
+    }
+
+    return (
+        <div className="container">
+            <h1>🏨 Hotel Booking</h1>
+
+            <form onSubmit={bookRoom}>
+
+                <div className="group">
+                    <label>Guest Name</label>
+                    <input
+                        type="text"
+                        placeholder="Enter your name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                    />
+                </div>
+
+                <div className="group">
+                    <label>Room Type</label>
+                    <select
+                        value={room}
+                        onChange={(e) => setRoom(e.target.value)}
+                    >
+                        <option>Deluxe</option>
+                        <option>Suite</option>
+                    </select>
+                </div>
+
+                <div className="group">
+                    <label>Number of Days</label>
+                    <input
+                        type="number"
+                        value={days}
+                        onChange={(e) => setDays(e.target.value)}
+                    />
+                </div>
+
+                <button type="submit">Book Room</button>
+
+            </form>
+
+            {message && <div className="success">{message}</div>}
+        </div>
+    );
+}
+
+function App() {
+    return <HotelBooking />;
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+
+</script>
+
+</body>
+</html>

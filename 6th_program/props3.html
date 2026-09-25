@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Rating System</title>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: #f8fafc;
+            text-align: center;
+            padding: 40px;
+        }
+
+        h1 {
+            color: #7c3aed;
+        }
+
+        .card {
+            background: white;
+            width: 400px;
+            margin: 30px auto;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        .product {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .rating {
+            font-size: 35px;
+            margin: 20px;
+        }
+
+        button {
+            padding: 12px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 7px;
+            background: #7c3aed;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+function Product(props) {
+
+    const [rating, setRating] = React.useState(3);
+
+    function increaseRating() {
+        if (rating < 5) {
+            setRating(rating + 1);
+        }
+    }
+
+    function decreaseRating() {
+        if (rating > 1) {
+            setRating(rating - 1);
+        }
+    }
+
+    return (
+        <div className="card">
+
+            <h2>Product Review</h2>
+
+            <div className="product">
+                {props.name}
+            </div>
+
+            <p>Category: {props.category}</p>
+
+            <div className="rating">
+                {"⭐".repeat(rating)}
+            </div>
+
+            <p>
+                Rating: {rating} / 5
+            </p>
+
+            <button onClick={increaseRating}>
+                👍 Increase Rating
+            </button>
+
+            <button onClick={decreaseRating}>
+                👎 Decrease Rating
+            </button>
+
+        </div>
+    );
+}
+
+function App() {
+
+    return (
+        <div>
+
+            <h1>Product Rating System</h1>
+
+            <Product
+                name="Wireless Headphones"
+                category="Electronics"
+            />
+
+        </div>
+    );
+}
+
+const root = ReactDOM.createRoot(
+    document.getElementById("root")
+);
+
+root.render(<App />);
+
+</script>
+
+</body>
+</html>

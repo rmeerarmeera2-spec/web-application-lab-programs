@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Leave Request</title>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: #eef2f7;
+        }
+
+        .container {
+            width: 420px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2563eb;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        textarea {
+            height: 80px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 7px;
+            background: #2563eb;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .success {
+            margin-top: 15px;
+            text-align: center;
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+function LeaveForm() {
+
+    const [name, setName] = React.useState("");
+    const [type, setType] = React.useState("Casual Leave");
+    const [date, setDate] = React.useState("");
+    const [reason, setReason] = React.useState("");
+    const [message, setMessage] = React.useState("");
+
+    function handleSubmit(event) {
+        event.preventDefault();
+
+        if (name === "" || date === "" || reason === "") {
+            setMessage("Please fill all fields.");
+        } else {
+            setMessage("Leave request submitted successfully!");
+        }
+    }
+
+    return (
+        <div className="container">
+
+            <h1>Employee Leave Request</h1>
+
+            <form onSubmit={handleSubmit}>
+
+                <label>Employee Name</label>
+                <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Enter your name"
+                />
+
+                <label>Leave Type</label>
+                <select
+                    value={type}
+                    onChange={(e) => setType(e.target.value)}
+                >
+                    <option>Casual Leave</option>
+                    <option>Sick Leave</option>
+                    <option>Emergency Leave</option>
+                </select>
+
+                <label>Leave Date</label>
+                <input
+                    type="date"
+                    value={date}
+                    onChange={(e) => setDate(e.target.value)}
+                />
+
+                <label>Reason</label>
+                <textarea
+                    value={reason}
+                    onChange={(e) => setReason(e.target.value)}
+                    placeholder="Enter reason"
+                ></textarea>
+
+                <button type="submit">
+                    Submit Request
+                </button>
+
+                {message && (
+                    <div className="success">{message}</div>
+                )}
+
+            </form>
+
+        </div>
+    );
+}
+
+function App() {
+    return <LeaveForm />;
+}
+
+const root = ReactDOM.createRoot(
+    document.getElementById("root")
+);
+
+root.render(<App />);
+
+</script>
+
+</body>
+</html>

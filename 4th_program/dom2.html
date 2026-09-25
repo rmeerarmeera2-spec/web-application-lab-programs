@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic Color Changer</title>
+</head>
+
+<body>
+
+<h2>Color Changer</h2>
+
+<button onclick="changeColor()">Change Background</button>
+
+<p id="msg">Click the button to change the color.</p>
+
+<script>
+
+function changeColor() {
+
+    document.body.style.backgroundColor = "lightblue";
+
+    document.getElementById("msg").innerHTML =
+        "Background color changed successfully!";
+}
+
+</script>
+
+</body>
+</html>
+

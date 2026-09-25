@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Course Progress Tracker</title>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: #ecfdf5;
+        }
+
+        .container {
+            width: 420px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            text-align: center;
+        }
+
+        h1 {
+            color: #059669;
+        }
+
+        .progress {
+            font-size: 45px;
+            font-weight: bold;
+            color: #10b981;
+            margin: 25px;
+        }
+
+        .bar {
+            height: 18px;
+            background: #d1fae5;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .fill {
+            height: 100%;
+            background: #10b981;
+        }
+
+        button {
+            padding: 12px 20px;
+            margin: 20px 5px 0;
+            border: none;
+            border-radius: 8px;
+            background: #059669;
+            color: white;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        button:hover {
+            background: #047857;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+function CourseTracker() {
+
+    const [progress, setProgress] = React.useState(40);
+
+    function increase() {
+        if (progress < 100) {
+            setProgress(progress + 10);
+        }
+    }
+
+    function decrease() {
+        if (progress > 0) {
+            setProgress(progress - 10);
+        }
+    }
+
+    return (
+        <div className="container">
+
+            <h1>📚 Course Progress</h1>
+
+            <h2>React Development</h2>
+
+            <div className="progress">
+                {progress}%
+            </div>
+
+            <div className="bar">
+                <div
+                    className="fill"
+                    style={{width: progress + "%"}}
+                ></div>
+            </div>
+
+            <button onClick={increase}>
+                Complete Lesson
+            </button>
+
+            <button onClick={decrease}>
+                Previous
+            </button>
+
+        </div>
+    );
+}
+
+function App() {
+    return <CourseTracker />;
+}
+
+const root = ReactDOM.createRoot(
+    document.getElementById("root")
+);
+
+root.render(<App />);
+
+</script>
+
+</body>
+</html>

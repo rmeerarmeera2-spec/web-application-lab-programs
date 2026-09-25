@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Doctor Appointment</title>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: #fce7f3;
+        }
+
+        .container {
+            width: 420px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        h1 {
+            text-align: center;
+            color: #ec4899;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 11px;
+            margin-top: 6px;
+            box-sizing: border-box;
+            border: 1px solid #f9a8d4;
+            border-radius: 7px;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            margin-top: 22px;
+            border: none;
+            border-radius: 8px;
+            background: #ec4899;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #db2777;
+        }
+
+        .success {
+            color: green;
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+function AppointmentForm() {
+
+    const [name, setName] = React.useState("");
+    const [doctor, setDoctor] = React.useState("Dr. Priya");
+    const [date, setDate] = React.useState("");
+    const [time, setTime] = React.useState("10:00 AM");
+    const [message, setMessage] = React.useState("");
+
+    function bookAppointment(event) {
+
+        event.preventDefault();
+
+        if (name === "" || date === "") {
+            setMessage("Please complete all fields.");
+        } else {
+            setMessage("Appointment booked successfully!");
+        }
+    }
+
+    return (
+        <div className="container">
+
+            <h1>🩺 Doctor Appointment</h1>
+
+            <form onSubmit={bookAppointment}>
+
+                <label>Patient Name</label>
+                <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Enter patient name"
+                />
+
+                <label>Select Doctor</label>
+                <select
+                    value={doctor}
+                    onChange={(e) => setDoctor(e.target.value)}
+                >
+                    <option>Dr. Priya</option>
+                    <option>Dr. Anitha</option>
+                    <option>Dr. Kumar</option>
+                </select>
+
+                <label>Appointment Date</label>
+                <input
+                    type="date"
+                    value={date}
+                    onChange={(e) => setDate(e.target.value)}
+                />
+
+                <label>Appointment Time</label>
+                <select
+                    value={time}
+                    onChange={(e) => setTime(e.target.value)}
+                >
+                    <option>10:00 AM</option>
+                    <option>11:00 AM</option>
+                    <option>02:00 PM</option>
+                    <option>04:00 PM</option>
+                </select>
+
+                <button type="submit">
+                    Book Appointment
+                </button>
+
+                {message && (
+                    <div className="success">{message}</div>
+                )}
+
+            </form>
+
+        </div>
+    );
+}
+
+function App() {
+    return <AppointmentForm />;
+}
+
+const root = ReactDOM.createRoot(
+    document.getElementById("root")
+);
+
+root.render(<App />);
+
+</script>
+
+</body>
+</html>

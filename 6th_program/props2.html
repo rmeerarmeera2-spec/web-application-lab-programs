@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Performance Dashboard</title>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: #eef2f7;
+            text-align: center;
+            padding: 40px;
+        }
+
+        h1 {
+            color: #1e3a8a;
+        }
+
+        .card {
+            background: white;
+            width: 400px;
+            margin: 30px auto;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        .info {
+            background: #f1f5f9;
+            padding: 12px;
+            margin: 10px;
+            border-radius: 8px;
+            text-align: left;
+        }
+
+        .score {
+            font-size: 40px;
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        button {
+            padding: 12px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 7px;
+            background: #2563eb;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+function Employee(props) {
+
+    const [score, setScore] = React.useState(70);
+
+    function increase() {
+        if (score < 100) {
+            setScore(score + 5);
+        }
+    }
+
+    function decrease() {
+        if (score > 0) {
+            setScore(score - 5);
+        }
+    }
+
+    return (
+        <div className="card">
+
+            <h2>Employee Performance</h2>
+
+            <div className="info">
+                <b>Name:</b> {props.name}
+            </div>
+
+            <div className="info">
+                <b>Department:</b> {props.department}
+            </div>
+
+            <div className="info">
+                <b>Experience:</b> {props.experience}
+            </div>
+
+            <p>Performance Score</p>
+
+            <div className="score">
+                {score}%
+            </div>
+
+            <button onClick={increase}>
+                Increase
+            </button>
+
+            <button onClick={decrease}>
+                Decrease
+            </button>
+
+        </div>
+    );
+}
+
+function App() {
+
+    return (
+        <div>
+
+            <h1>Employee Performance Dashboard</h1>
+
+            <Employee
+                name="chandrakumar"
+                department="Software Development"
+                experience="2 Years"
+            />
+
+        </div>
+    );
+}
+
+const root = ReactDOM.createRoot(
+    document.getElementById("root")
+);
+
+root.render(<App />);
+
+</script>
+
+</body>
+</html>

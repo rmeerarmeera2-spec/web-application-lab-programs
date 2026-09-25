@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Voting Counter</title>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background: #f2f5f9;
+            padding: 40px;
+        }
+
+        .card {
+            background: white;
+            width: 350px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+function Voting() {
+
+    const [votes, setVotes] = React.useState(0);
+
+    return (
+        <div className="card">
+
+            <h2>Voting Counter</h2>
+
+            <h3>Total Votes: {votes}</h3>
+
+            <button onClick={() => setVotes(votes + 1)}>
+                Vote
+            </button>
+
+            <button onClick={() => setVotes(0)}>
+                Reset
+            </button>
+
+        </div>
+    );
+}
+
+function App() {
+    return (
+        <div>
+            <h1>Digital Voting Counter</h1>
+            <Voting />
+        </div>
+    );
+}
+
+const root = ReactDOM.createRoot(
+    document.getElementById("root")
+);
+
+root.render(<App />);
+
+</script>
+
+</body>
+</html>

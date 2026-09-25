@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Order System</title>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: #fff7ed;
+        }
+
+        .card {
+            width: 400px;
+            margin: 70px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        h1 {
+            text-align: center;
+            color: #ea580c;
+        }
+
+        .group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 11px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #ea580c;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #c2410c;
+        }
+
+        .bill {
+            margin-top: 20px;
+            padding: 15px;
+            background: #ffedd5;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+function ProductOrder() {
+
+    const [product, setProduct] = React.useState("Laptop Bag");
+    const [quantity, setQuantity] = React.useState("");
+    const [bill, setBill] = React.useState("");
+
+    function order(e) {
+        e.preventDefault();
+
+        if (quantity === "") {
+            setBill("Please enter quantity.");
+            return;
+        }
+
+        let price = 0;
+
+        if (product === "Laptop Bag") price = 1200;
+        if (product === "Headphones") price = 2000;
+        if (product === "Keyboard") price = 1500;
+
+        let total = price * Number(quantity);
+
+        setBill(
+            "Product: " + product +
+            " | Quantity: " + quantity +
+            " | Total: ₹" + total
+        );
+    }
+
+    return (
+        <div className="card">
+
+            <h1>📦 Product Order</h1>
+
+            <form onSubmit={order}>
+
+                <div className="group">
+                    <label>Select Product</label>
+
+                    <select
+                        value={product}
+                        onChange={(e) => setProduct(e.target.value)}
+                    >
+                        <option>Laptop Bag</option>
+                        <option>Headphones</option>
+                        <option>Keyboard</option>
+                    </select>
+                </div>
+
+                <div className="group">
+                    <label>Quantity</label>
+
+                    <input
+                        type="number"
+                        min="1"
+                        placeholder="Enter quantity"
+                        value={quantity}
+                        onChange={(e) => setQuantity(e.target.value)}
+                    />
+                </div>
+
+                <button>Place Order</button>
+
+            </form>
+
+            {bill && <div className="bill">{bill}</div>}
+
+        </div>
+    );
+}
+
+ReactDOM.createRoot(document.getElementById("root"))
+    .render(<ProductOrder />);
+
+</script>
+
+</body>
+</html>
