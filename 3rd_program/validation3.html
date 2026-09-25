@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Mark Validator</title>
+</head>
+<body>
+
+<h2>Student Mark Entry</h2>
+
+<form onsubmit="return validate()">
+
+    Student Name:
+    <input type="text" id="name"><br><br>
+
+    Mark:
+    <input type="text" id="mark"><br><br>
+
+    <button type="submit">Check Mark</button>
+
+</form>
+
+<p id="msg" style="color:red;"></p>
+
+<script>
+
+function validate() {
+
+    let name = document.getElementById("name").value;
+    let mark = document.getElementById("mark").value;
+    let message = document.getElementById("msg");
+
+    if (name == "" || mark == "") {
+        message.innerHTML = "All fields are required";
+        return false;
+    }
+
+    if (mark < 0 || mark > 100) {
+        message.innerHTML = "Mark must be between 0 and 100";
+        return false;
+    }
+
+    message.style.color = "green";
+    message.innerHTML = "Mark entered successfully!";
+    return false;
+}
+
+</script>
+
+</body>
+</html>
+

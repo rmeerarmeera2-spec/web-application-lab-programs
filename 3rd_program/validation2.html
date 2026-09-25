@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event Registration Validator</title>
+</head>
+<body>
+
+<h2>Event Registration</h2>
+
+<form onsubmit="return validate()">
+
+    Name:
+    <input type="text" id="name"><br><br>
+
+    Email:
+    <input type="text" id="email"><br><br>
+
+    Age:
+    <input type="text" id="age"><br><br>
+
+    <button type="submit">Register</button>
+
+</form>
+
+<p id="msg" style="color:red;"></p>
+
+<script>
+
+function validate() {
+
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let age = document.getElementById("age").value;
+    let message = document.getElementById("msg");
+
+    if (name == "" || email == "" || age == "") {
+        message.innerHTML = "All fields are required";
+        return false;
+    }
+
+    if (!email.includes("@")) {
+        message.innerHTML = "Enter a valid email";
+        return false;
+    }
+
+    if (age < 18) {
+        message.innerHTML = "Age must be 18 or above";
+        return false;
+    }
+
+    message.style.color = "green";
+    message.innerHTML = "Registration successful!";
+    return false;
+}
+
+</script>
+
+</body>
+</html>
+

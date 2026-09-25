@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Library Membership Checker</title>
+</head>
+<body>
+
+<h2>Library Membership Form</h2>
+
+<form onsubmit="return checkForm()">
+
+    Name:
+    <input type="text" id="name"><br><br>
+
+    Email:
+    <input type="text" id="email"><br><br>
+
+    Phone:
+    <input type="text" id="phone"><br><br>
+
+    <button type="submit">Apply</button>
+</form>
+
+<p id="msg"></p>
+
+<script>
+function checkForm() {
+
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let phone = document.getElementById("phone").value;
+    let msg = document.getElementById("msg");
+
+    if (name == "" || email == "" || phone == "") {
+        msg.innerHTML = "Please fill all fields";
+        msg.style.color = "red";
+        return false;
+    }
+
+    if (!email.includes("@")) {
+        msg.innerHTML = "Enter a valid email";
+        msg.style.color = "red";
+        return false;
+    }
+
+    if (phone.length != 10) {
+        msg.innerHTML = "Phone number must contain 10 digits";
+        msg.style.color = "red";
+        return false;
+    }
+
+    msg.innerHTML = "Membership application submitted!";
+    msg.style.color = "green";
+
+    return false;
+}
+</script>
+
+</body>
+</html>
+

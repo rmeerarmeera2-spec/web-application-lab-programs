@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Online Feedback Checker</title>
+</head>
+<body>
+
+<h2>Feedback Form</h2>
+
+<form onsubmit="return validate()">
+
+    Name:
+    <input type="text" id="name"><br><br>
+
+    Feedback:
+    <textarea id="feedback"></textarea><br><br>
+
+    <button type="submit">Send Feedback</button>
+
+</form>
+
+<p id="msg" style="color:red;"></p>
+
+<script>
+
+function validate() {
+
+    let name = document.getElementById("name").value;
+    let feedback = document.getElementById("feedback").value;
+    let message = document.getElementById("msg");
+
+    if (name == "" || feedback == "") {
+        message.innerHTML = "Please fill all fields";
+        return false;
+    }
+
+    if (feedback.length < 10) {
+        message.innerHTML = "Feedback must contain at least 10 characters";
+        return false;
+    }
+
+    message.style.color = "green";
+    message.innerHTML = "Thank you for your feedback!";
+    return false;
+}
+
+</script>
+
+</body>
+</html>
+
